@@ -3,10 +3,10 @@
   "version": "1.1.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://имя_пользователя.github.io/OlenaYarotska",
+  "homepage": "https://OlenaYarotska.github.io/goit-js-hw-08-",
   "scripts": {
     "dev": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /OlenaYarotska/"
+    "build": "parcel build src/*.html --public-url goit-js-hw-08-/"
   },
   "repository": {
     "type": "git",
