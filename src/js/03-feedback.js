@@ -11,28 +11,36 @@ form.addEventListener('input', throttle(formInput, 500));
 
 function formInput(e) {
     dataUpdate[e.target.name] = e.target.value;
-    localStorage.setItem('FORM_SAVED_INF', JSON.stringify(dataUpdate));
-        
+    localStorage.setItem('FORM_SAVED_INF', JSON.stringify(dataUpdate));      
 };
 
 function formSubmit(e) {
     e.preventDefault();
-    e.target.reset();
-    console.log('formSavedInf', JSON.parse(localStorage.getItem(FORM_SAVED_INF)));
+
+    const formActive = e.currentTarget.elements;
+    const inputActive = formActive.email.value;
+    const textareaActive = formActive.message.value;
+    const activeInf = {
+        inputActive,
+        textareaActive,
+    };
+    console.log(activeInf);
+    e.currentTarget.reset();
     localStorage.removeItem(FORM_SAVED_INF);
 };
 
 filledTextarea();
 
 function filledTextarea() {
-    const textareaSavedMessage = JSON.parse(localStorage.getItem(FORM_SAVED_INF));
-    if (textareaSavedMessage && textareaSavedMessage.message) {
-        textarea.value = textareaSavedMessage.message;
-    };
-
-    if (textareaSavedMessage && textareaSavedMessage.input) {
-        input.value = textareaSavedMessage.input;
-    };  
+    const savedMessage = localStorage.getItem(FORM_SAVED_INF);
+    const parsedMessage = JSON.parse(savedMessage);
+  
+    if (parsedMessage) {
+        input.value = parsedMessage.inputActive; 
+        textarea.value = parsedMessage.textareaActive;
+        dataUpdate.textareaActive = parsedMessage.textareaActive;
+        dataUpdate.inputActive = parsedMessage.inputActive;
+    }
 };
 
 
