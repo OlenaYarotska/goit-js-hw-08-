@@ -18,14 +18,25 @@ function formInput(e) {
     console.log(dataUpdate);
 }
 
+// function filledTextarea() {
+//     const saveMessage = JSON.parse(localStorage.getItem(FORM_SAVED_INF));
+//   if (saveMessage) {
+//     console.log(saveMessage);
+//     input.value = saveMessage.email;
+//     textarea.value = saveMessage.message;
+//   }
+   
+// }
 function filledTextarea() {
-    const saveMessage = JSON.parse(localStorage.getItem(FORM_SAVED_INF));
-  if (saveMessage) {
-    console.log(saveMessage);
-    input.value = saveMessage.email;
-    textarea.value = saveMessage.message;
-  }
-}
+    const savedMessage = JSON.parse(localStorage.getItem(FORM_SAVED_INF));
+    if (savedMessage) {
+        console.log(savedMessage);
+        Object.entries(savedMessage).forEach(([name, value]) => {
+            dataUpdate[name] = value;
+            form.elements[name].value = value;
+        })
+    }
+};
 
 function formSubmit(e) {
     e.preventDefault();
